@@ -1,10 +1,10 @@
 package customer;
 
-import java.awt.*; 
+import java.awt.*;  
 import java.awt.event.*;
 import java.util.regex.*;
-
 import javax.swing.*;
+
 public class Register extends JPanel{
 	
 	SpringLayout layout;
@@ -97,6 +97,7 @@ public class Register extends JPanel{
 		//check if password is valid
 		if(validatePassword(String.valueOf(pText.getPassword())) == false) {
 			pText.setText("");
+			cpText.setText("");
 			return;
 		}
 		
