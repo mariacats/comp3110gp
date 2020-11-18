@@ -19,6 +19,8 @@ public class BillList extends JPanel{
 	JTextField billText;
 	List<Bill> billList;
 	Bill bill;
+	CustomerInfo ci;
+	JButton returnButton;
 	
 	Customer customer;	//customer object
 	int duePeriod, size;
@@ -44,14 +46,19 @@ public class BillList extends JPanel{
 		layout = new SpringLayout();
 		setLayout(layout);
 
-		// add goal button
+		// add addBill button
 		addBill = new JButton("Create a new Bill");
 		add(new JLabel(""));
 		add(addBill);
+		
+		//add return button
+		returnButton = new JButton("Return");
+		add(new JLabel(""));
+		add(returnButton);
 
 		// format labels, textfields, button
 		SpringUtilities.makeCompactGrid(this, 
-				this.size+1, 2, // rows, cols
+				this.size+2, 2, // rows, cols
 				6, 6, // initX, initY
 				6, 6); // xPad, yPad
 
@@ -76,8 +83,15 @@ public class BillList extends JPanel{
 			}
 		});
 		
+		//if Return button is pressed
+		returnButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				returnToMenu();
+			}
+		});
+		
 		//add Bill to the frame
-		frame.setSize(325, 75);
+		frame.setSize(325, 110);
 		frame.add(this);
 		frame.repaint();
 		frame.validate();	
@@ -96,7 +110,7 @@ public class BillList extends JPanel{
 			add(l);
 			
 			JTextField field = new JTextField(20);
-			field.setText("$"+billList.get(i).getValue()+" is due in "+billList.get(i).getPeriod()+" days.");
+			field.setText("$"+billList.get(i).getValue()+"0 is due in "+billList.get(i).getPeriod()+" days.");
 			l.setLabelFor(field);
 			field.setEditable(false);
 			add(field);
@@ -104,10 +118,17 @@ public class BillList extends JPanel{
 		
 		//*******below is super tedious and inefficient, needs to be reworked*******
 		//BUT.. works for now
-		//add income button
+		//add addBill button
 		addBill = new JButton("Create a new Bill");
 		add(new JLabel(""));
 		add(addBill);
+		
+		//add return button
+		returnButton = new JButton("Return");
+		add(new JLabel(""));
+		add(returnButton);
+		
+		
 		
 		//add income button listener
 		addBill.addActionListener( new ActionListener() {
@@ -130,19 +151,32 @@ public class BillList extends JPanel{
 			}
 		});
 		
+		//if Return button is pressed
+		returnButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				returnToMenu();
+			}
+		});
+		
 		
 		
 		
 		SpringUtilities.makeCompactGrid(this,
-				             this.size+1, 2, //rows, cols
+				             this.size+2, 2, //rows, cols
 				             6, 6,        //initX, initY
 				             6, 6);       //xPad, yPad
 		
-		//resize frame based on # of incomes added
-		this.frame.setSize(325, 75*this.size);
+		//resize frame based on # of bills added
+		this.frame.setSize(325, 55*(this.size+2));
 		this.revalidate();
 		this.repaint();
 	}
+	
+	private void returnToMenu() {
+		frame.remove(this);
+		ci = new CustomerInfo(frame);
+	}
+
 	
 }
 

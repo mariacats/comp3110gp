@@ -22,8 +22,11 @@ public class IncomeList extends JPanel{
 	JButton addIncome;
 	JTextField incText;
 	
+	JButton returnButton;
+	
 	List<Income> incomeList;
 	Income income;
+	CustomerInfo ci;
 	
 	
 	//Overloaded constructor that takes JFrame as input
@@ -46,15 +49,20 @@ public class IncomeList extends JPanel{
 		layout = new SpringLayout();
 		setLayout(layout);
 		
-		//add goal button
+		//add addIncome button
 		addIncome = new JButton("Create a new Income");
 		add(new JLabel(""));
 		add(addIncome);
 		
+		//add return button
+		returnButton = new JButton("Return");
+		add(new JLabel(""));
+		add(returnButton);
+		
 		
 		//format labels, textfields, button
 		SpringUtilities.makeCompactGrid(this,
-		               this.size, 2, //rows, cols
+		               this.size+2, 2, //rows, cols
 		               6, 6,        //initX, initY
 		               6, 6);       //xPad, yPad
 		
@@ -78,8 +86,15 @@ public class IncomeList extends JPanel{
 			}
 		});
 		
+		//if Return button is pressed
+		returnButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				returnToMenu();
+			}
+		});
+		
 		//add Income to the frame
-		frame.setSize(325, 75);
+		frame.setSize(325, 110);
 		frame.add(this);
 		frame.repaint();
 		frame.validate();
@@ -94,13 +109,12 @@ public class IncomeList extends JPanel{
 		//increment the frame size to add a new row to place the newly created Income.
 		this.size++;
 		
-		
 		for(int i=0; i < incomeList.size(); i++) {
 			JLabel l = new JLabel("Income "+(i+1)+":", JLabel.TRAILING);
 			add(l);
 			
 			JTextField field = new JTextField(20);
-			field.setText("$"+incomeList.get(i).getValue()+" is earned every "+incomeList.get(i).getPeriod()+" days.");
+			field.setText("$"+incomeList.get(i).getValue()+"0 is earned every "+incomeList.get(i).getPeriod()+" days.");
 			l.setLabelFor(field);
 			field.setEditable(false);
 			add(field);
@@ -112,6 +126,12 @@ public class IncomeList extends JPanel{
 		addIncome = new JButton("Create a new Income");
 		add(new JLabel(""));
 		add(addIncome);
+		
+		//add goal button
+		returnButton = new JButton("Return");
+		add(new JLabel(""));
+		add(returnButton);
+				
 		
 		//add income button listener
 		addIncome.addActionListener( new ActionListener() {
@@ -134,18 +154,30 @@ public class IncomeList extends JPanel{
 			}
 		});
 		
+		//if View Income button is pressed
+		returnButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				returnToMenu();
+			}
+		});
+		
 		
 		
 		
 		SpringUtilities.makeCompactGrid(this,
-				             this.size+1, 2, //rows, cols
+				             this.size+2, 2, //rows, cols
 				             6, 6,        //initX, initY
 				             6, 6);       //xPad, yPad
 		
 		//resize frame based on # of incomes added
-		this.frame.setSize(325, 75*(this.size+1));
+		this.frame.setSize(325, 55*(this.size+2));
 		this.revalidate();
 		this.repaint();
+	}
+	
+	private void returnToMenu() {
+		frame.remove(this);
+		ci = new CustomerInfo(frame);
 	}
 
 
