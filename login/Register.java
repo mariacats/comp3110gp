@@ -191,7 +191,7 @@ public class Register extends JPanel{
 	 * Returns true if password passes valid parameters, otherwise returns false
 	 */
 	public boolean validatePassword(String u) {
-		if(u.length()<4 || u.length()>25) {
+		/*if(u.length()<4 || u.length()>25) {
 			JOptionPane.showMessageDialog(this, "Your password must be between 4-25 characters.");
 			return false;
 		}
@@ -200,7 +200,7 @@ public class Register extends JPanel{
 		if(this.matcher.find() == false) {
 			JOptionPane.showMessageDialog(this, "Your password must contain 7 characters, one uppercase letter, one digit, and one special character.");
 			return false;
-		}
+		}*/
 		return true;
 
 	}

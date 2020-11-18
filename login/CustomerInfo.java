@@ -6,8 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 public class CustomerInfo extends JPanel{
 	
-	Income inc;
-	Bill bill;
+	IncomeList income;
+	BillList bill;
 	Goal goal;
 	
 	SpringLayout layout;
@@ -163,7 +163,7 @@ public class CustomerInfo extends JPanel{
 	 */
 	public void openIncome() {
 		frame.remove(this);
-		inc = new Income(frame);
+		income = new IncomeList(frame);
 	}
 	
 	/* Function to close Login panel and open Register panel
@@ -172,7 +172,7 @@ public class CustomerInfo extends JPanel{
 	 */
 	public void openBill() {
 		frame.remove(this);
-		bill = new Bill(frame);
+		bill = new BillList(frame);
 	}
 	
 	/* Function to close Login panel and open Register panel
