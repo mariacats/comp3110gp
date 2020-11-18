@@ -1,5 +1,8 @@
 package customer;
 
+//WILL PROBABLY BE RENAMED TO MAINMENU
+//ADD SETTER/GETTER FUNCTIONS FOR NAME/ADDRESS/PHONE#/BALANCE TO CUSTOMER
+//INSTEAD OF DOING EVERYTHING INSIDE THE CONSTRUCTOR, CREATE A MAKE MENU FUNCTION - DONT HAVE TO DO EVERYTHING TWICE
 import java.awt.*; 
 import java.awt.event.*;
 
@@ -21,6 +24,7 @@ public class CustomerInfo extends JPanel{
 	private int id;
 	
 	//placeholder until i create a better menu/return system
+	//Overloaded constructor that takes only JFrame
 	CustomerInfo(JFrame frame){
 		this.frame = frame;
 		

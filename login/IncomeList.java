@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 //NEEDS ADJUSTMENT
-//NEEDS BUTTON TO RETURN TO MAIN MENU
 //NEEDS CUSTOMER OBJECT SAVING AND LOADING
 //ADD A TOTAL / MONTH CALCULATION THING
 //ADD OPTION TO REMOVE/EDIT AN INCOME
@@ -32,16 +31,17 @@ public class IncomeList extends JPanel{
 	//Overloaded constructor that takes JFrame as input
 	public IncomeList(JFrame frame) {
 		
+		//create new list of incomes
 		incomeList = new ArrayList<Income>();
-		
 		this.size = 0;
 		setupGUI(frame);
-		//this.customer = customer;
-		//period = 31;				//sets the default payment period to 31 days
-		//value = 1000;				//sets the default income value to 1000
-		
+
 	}
 	
+	/* Function to setup the GUI
+	 * Takes the main JFrame as input
+	 * Returns nothing.
+	 */
 	public void setupGUI(JFrame frame) {
 				
 		//setup frame with layout
@@ -60,15 +60,17 @@ public class IncomeList extends JPanel{
 		add(returnButton);
 		
 		
-		//format labels, textfields, button
+		//creates the GUI Layout - adding buttons/textfields/etc.
 		SpringUtilities.makeCompactGrid(this,
 		               this.size+2, 2, //rows, cols
 		               6, 6,        //initX, initY
 		               6, 6);       //xPad, yPad
 		
-		//if View Income button is pressed
+		//if "Add New Income" button is pressed
 		addIncome.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//Get the data inputs and assign them to the Income object
 				income = new Income();
 				
 				//*********this doesn't check for text input, fix*********
@@ -78,9 +80,10 @@ public class IncomeList extends JPanel{
 				income.setValue(value);
 				income.setPeriod(days);
 				
+				//Add Income object to the List
 				incomeList.add(income);
 				
-				//then add a thing to the GUI that says "Income 1: $X every Y days."
+				//Call function to add income to GUI
 				newIncome();
 				
 			}
@@ -102,6 +105,7 @@ public class IncomeList extends JPanel{
 	}
 
 	public void newIncome() {
+		//Clear and remake GUI
 		this.removeAll();
 		layout = new SpringLayout();
 		setLayout(layout);
@@ -109,6 +113,7 @@ public class IncomeList extends JPanel{
 		//increment the frame size to add a new row to place the newly created Income.
 		this.size++;
 		
+		//Loop to add add Income objects in the List to the GUI
 		for(int i=0; i < incomeList.size(); i++) {
 			JLabel l = new JLabel("Income "+(i+1)+":", JLabel.TRAILING);
 			add(l);
@@ -120,23 +125,22 @@ public class IncomeList extends JPanel{
 			add(field);
 		}
 		
-		//*******below is super tedious and inefficient, needs to be reworked*******
-		//BUT.. works for now
-		//add income button
+		//add "Create a new Income" button
 		addIncome = new JButton("Create a new Income");
 		add(new JLabel(""));
 		add(addIncome);
 		
-		//add goal button
+		//add "Return" button
 		returnButton = new JButton("Return");
 		add(new JLabel(""));
 		add(returnButton);
 				
 		
-		//add income button listener
+		//add addIncome button listener
 		addIncome.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//Get the data inputs and assign them to the Income object
 				income = new Income();
 				
 				//*********this doesn't check for text input, fix*********
@@ -146,15 +150,16 @@ public class IncomeList extends JPanel{
 				income.setValue(value);
 				income.setPeriod(days);
 				
+				//Add Income object to the List
 				incomeList.add(income);
 				
-				//then add a thing to the GUI that says "Income 1: $X every Y days."
+				//Call function to add income to GUI
 				newIncome();
 				
 			}
 		});
 		
-		//if View Income button is pressed
+		//if Return button is pressed
 		returnButton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				returnToMenu();
@@ -175,6 +180,10 @@ public class IncomeList extends JPanel{
 		this.repaint();
 	}
 	
+	/* Function to return to main menu
+	 * Takes no input
+	 * Returns nothing.
+	 */
 	private void returnToMenu() {
 		frame.remove(this);
 		ci = new CustomerInfo(frame);

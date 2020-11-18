@@ -4,11 +4,6 @@ import javax.swing.*;
 import java.awt.*;  
 import java.awt.event.*;
 
-//NEEDS ADJUSTMENT
-//NEEDS BUTTON TO RETURN TO MAIN MENU
-//NEEDS CUSTOMER OBJECT SAVING AND LOADING
-//ADD A TOTAL / MONTH CALCULATION THING
-//ADD OPTION TO REMOVE/EDIT AN INCOME
 public class Income extends JPanel{
 	
 	JFrame frame;

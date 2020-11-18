@@ -26,17 +26,13 @@ public class BillList extends JPanel{
 	int duePeriod, size;
 	float amountDue;
 	
-	//default constructor that has some preset values,  must take a customer object as input
+	//Overloaded constructor that takes JFrame as input
 	public BillList(JFrame frame) {
+		
 		billList = new ArrayList<Bill>();
 		this.size = 0;
-		setupGUI(frame);
-		
-		
-		//this.customer = customer;
-		//duePeriod = 31;				    //sets the default due period to 31 days
-		//amountDue = 500;				//sets the default income value to 500
-		
+		setupGUI(frame);	
+	
 	}
 
 	public void setupGUI(JFrame frame) {
@@ -51,21 +47,22 @@ public class BillList extends JPanel{
 		add(new JLabel(""));
 		add(addBill);
 		
-		//add return button
+		//add Return button
 		returnButton = new JButton("Return");
 		add(new JLabel(""));
 		add(returnButton);
 
-		// format labels, textfields, button
+		//creates the GUI Layout - adding buttons/textfields/etc.
 		SpringUtilities.makeCompactGrid(this, 
 				this.size+2, 2, // rows, cols
 				6, 6, // initX, initY
 				6, 6); // xPad, yPad
 
-		// if Add Bill button is pressed
+		// if "Create new Bill" button is pressed
 		addBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//Retrieve the data inputs and add them to the Bill object
 				bill = new Bill();
 				
 				// *********this doesn't check for text input, fix*********
@@ -75,9 +72,10 @@ public class BillList extends JPanel{
 				bill.setAmountDue(value);
 				bill.setDuePeriod(days);
 				
+				//Add Bill object to the List
 				billList.add(bill);
 
-				// then add a thing to the GUI that says "Income 1: $X every Y days."
+				// Remake GUI with new Bill
 				newBill();
 
 			}
@@ -98,6 +96,8 @@ public class BillList extends JPanel{
 	}
 	
 	public void newBill() {
+		
+		//Clear and remake GUI
 		this.removeAll();
 		layout = new SpringLayout();
 		setLayout(layout);
@@ -105,6 +105,7 @@ public class BillList extends JPanel{
 		//increment the frame size to add a new row to place the newly created Income.
 		this.size++;
 		
+		//Loop to add add Bill objects in the List to the GUI
 		for(int i=0; i < billList.size(); i++) {
 			JLabel l = new JLabel("Bill "+(i+1)+":", JLabel.TRAILING);
 			add(l);
@@ -116,9 +117,7 @@ public class BillList extends JPanel{
 			add(field);
 		}
 		
-		//*******below is super tedious and inefficient, needs to be reworked*******
-		//BUT.. works for now
-		//add addBill button
+		//Add addBill button
 		addBill = new JButton("Create a new Bill");
 		add(new JLabel(""));
 		add(addBill);
@@ -130,10 +129,11 @@ public class BillList extends JPanel{
 		
 		
 		
-		//add income button listener
+		//add addBill button listener
 		addBill.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//Retrieve the data inputs and add them to the Bill object
 				bill = new Bill();
 				
 				// *********this doesn't check for text input, fix*********
@@ -143,9 +143,10 @@ public class BillList extends JPanel{
 				bill.setAmountDue(value);
 				bill.setDuePeriod(days);
 				
+				//Add Bill object to the List
 				billList.add(bill);
 
-				// then add a thing to the GUI that says "Income 1: $X every Y days."
+				// Remake GUI with new Bill
 				newBill();
 				
 			}
@@ -172,6 +173,10 @@ public class BillList extends JPanel{
 		this.repaint();
 	}
 	
+	/* Returns to the Main Menu
+	 * Takes no input
+	 * Returns nothing
+	 */
 	private void returnToMenu() {
 		frame.remove(this);
 		ci = new CustomerInfo(frame);

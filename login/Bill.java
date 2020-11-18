@@ -4,11 +4,6 @@ import javax.swing.*;
 import java.awt.*;  
 import java.awt.event.*;
 
-//NEEDS ADJUSTMENT
-//NEEDS BUTTON TO RETURN TO MAIN MENU
-//NEEDS CUSTOMER OBJECT SAVING AND LOADING
-//ADD A TOTAL / MONTH CALCULATION THING
-//ADD OPTION TO REMOVE/COMPLETE/EDIT A BILL
 public class Bill {
 	
 	JFrame frame;
@@ -23,8 +18,6 @@ public class Bill {
 	
 	//default constructor that has some preset values,  must take a customer object as input
 	public Bill() {
-		//setupGUI(frame);
-		
 		
 		//this.customer = customer;
 		duePeriod = 31;				    //sets the default due period to 31 days
