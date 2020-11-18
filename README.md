@@ -11,4 +11,4 @@ added feature to add income and add bills
 
 goal code is finished, needs to be implemented into GUI
 
-cannot currently return to main menu without restarting program
+data is not yet saved when returning to menu and going back
