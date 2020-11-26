@@ -8,6 +8,10 @@ import java.io.*;
 
 public class Goal {
 	
+	double goalAmount;
+	int goalDate;
+	
+	
 	double saving;
 	double goal;
 	double rem;
@@ -17,7 +21,7 @@ public class Goal {
 	long ReqTime;
 	
 	
-	public Goal(JFrame frame) {
+	public Goal() {
 		saving = 1000.0;
 		goal = 350.40;
 		rem = saving - goal;
@@ -33,6 +37,28 @@ public class Goal {
 		setTimeRequired();
 		
 	}
+	
+	
+	public void setGoalAmount(double goalAmount) {
+		this.goalAmount = goalAmount;
+	}
+	
+	public double getGoalAmount() {
+		return this.goalAmount;
+	}
+	
+	public void setGoalDate(int goalDate) {
+		this.goalDate = goalDate;
+	}
+	
+	public int getGoalDate() {
+		return this.goalDate;
+	}
+	
+	
+	
+	
+	
 	
 	public void setSav(double income, double bill) {
 		

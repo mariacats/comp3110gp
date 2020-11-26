@@ -1,5 +1,7 @@
 package customer;
 
+import java.util.*;  
+
 public class Customer {
 	private String username;
 	private String password;
@@ -9,10 +11,19 @@ public class Customer {
 	private String phoneNumber;
 	private float balance;
 	
+	private List<Income> incomeList;
+	private List<Bill> billList;
+	private List<Goal> goalList;
+	
 	Customer(String username, String password, String email){
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		
+		//create blank income/bill/goal lists
+		incomeList = new ArrayList<Income>();
+		billList = new ArrayList<Bill>();
+		goalList = new ArrayList<Goal>();
 	}
 	
 	//setter function for username
@@ -83,6 +94,18 @@ public class Customer {
 	//getter function for balance
 	public float getBalance() {
 		return this.balance;
+	}
+	
+	public List<Income> getIncomeList() {
+		return this.incomeList;
+	}
+	
+	public List<Bill> getBillList(){
+		return this.billList;
+	}
+	
+	public List<Goal> getGoalList(){
+		return this.goalList;
 	}
 
 }

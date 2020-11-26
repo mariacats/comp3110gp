@@ -25,7 +25,7 @@ public class Login extends JPanel{
 	private JPasswordField pText;
 	private JButton loginButton;
 	private JButton registerButton;
-	CustomerInfo ci;
+	MainMenu ci;
 
 	Login(JFrame frame, Database db){
 		
@@ -166,7 +166,7 @@ public class Login extends JPanel{
 	//Function to remove Login panel and call CustomerInfo panel
 	public void loginSuccess() {
 		frame.remove(this);
-		ci = new CustomerInfo(frame, this.db, this.id);
+		ci = new MainMenu(frame, this.db, this.id);
 	}
 	
 }
