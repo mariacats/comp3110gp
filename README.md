@@ -16,7 +16,11 @@ data is not yet saved when returning to menu and going back
 NOV 26
 
 renamed somethings to make more sense
+
 more efficient
+
 data is carried over between menus
+
 data is saved to customer
+
 all features functional (besides save/load outside of code)
