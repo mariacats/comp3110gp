@@ -24,3 +24,9 @@ data is carried over between menus
 data is saved to customer
 
 all features functional (besides save/load outside of code)
+
+NOV 30
+
+added safeties/checks to all input
+
+round to 2 decimal places
