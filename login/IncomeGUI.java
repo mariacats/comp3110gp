@@ -6,9 +6,6 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 
-//NEEDS ADJUSTMENT
-//NEEDS CUSTOMER OBJECT SAVING AND LOADING
-//ADD A TOTAL / MONTH CALCULATION THING
 public class IncomeGUI extends JPanel{
 	
 	JFrame frame;
@@ -87,9 +84,31 @@ public class IncomeGUI extends JPanel{
 				//Get the data inputs and assign them to the Income object
 				income = new Income();
 				
-				//*********this doesn't check for text input, fix*********
-				float value = Float.parseFloat(JOptionPane.showInputDialog(frame, "What is the income amount?", null));
-				int days = Integer.parseInt(JOptionPane.showInputDialog(frame, "How often(days) do you receive this income?", null));
+				
+				//Get input from user, check if input is valid. If valid, set input.
+				double value;
+				
+				while(true) {
+					String input = JOptionPane.showInputDialog(frame, "What is the income amount?", null);
+					if(isDouble(input)) {
+						value = Double.parseDouble(input);
+						break;
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+				}
+				
+				int days;
+				
+				while(true) {
+					String input = JOptionPane.showInputDialog(frame, "How often(days) do you receive this income?", null);
+					if(isInteger(input)) {
+						days = Integer.parseInt(input);
+						break;
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+				}
 				
 				income.setValue(value);
 				income.setPeriod(days);
@@ -112,11 +131,22 @@ public class IncomeGUI extends JPanel{
 					JOptionPane.showMessageDialog(null, "There are no Incomes to remove!");
 				} 
 				else {
-					int remove = Integer.parseInt(JOptionPane.showInputDialog(frame,
-							"Enter the number of the Income you wish to remove: ", null));
+					int remove;
+					while(true) {
+						String input = JOptionPane.showInputDialog(frame, "Enter the number of the Income you wish to remove: ", null);
+						if(isInteger(input)) {
+							remove = Integer.parseInt(input);
+							if(remove > 0 && remove <= incomeList.size()){
+								break;
+							}
+						}
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+							
+					}
 					removeIncome(remove);
 					setupGUI();
 				}
+
 			}
 		});
 		
@@ -142,7 +172,42 @@ public class IncomeGUI extends JPanel{
 		this.repaint();
 	}
 	
+	/* Function to check if string being parsed is an Integer
+	 * Takes String as input
+	 * Returns true if it is an int, false otherwise
+	 */
+	private boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
 	
+	/* Function to check if string being parsed is an Double
+	 * Takes String as input
+	 * Returns true if it is an double, false otherwise
+	 */
+	private boolean isDouble(String s) {
+	    try { 
+	        Double.parseDouble(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	/* Function to remove the income from the list
+	 * Takes location of income in list to be removed
+	 * Returns nothing. Remove the income and decrement size.
+	 */
 	private void removeIncome(int remove) {
 		this.incomeList.remove(remove-1);
 		this.size--;

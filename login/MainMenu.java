@@ -1,8 +1,5 @@
 package customer;
 
-//WILL PROBABLY BE RENAMED TO MAINMENU
-//ADD SETTER/GETTER FUNCTIONS FOR NAME/ADDRESS/PHONE#/BALANCE TO CUSTOMER
-//INSTEAD OF DOING EVERYTHING INSIDE THE CONSTRUCTOR, CREATE A MAKE MENU FUNCTION - DONT HAVE TO DO EVERYTHING TWICE
 import java.awt.*; 
 import java.awt.event.*;
 
@@ -19,7 +16,7 @@ public class MainMenu extends JPanel{
 	JFrame frame;
 	Database db;
 	private String name, address, phoneNumber;
-	private float balance;
+	private double balance;
 	private JTextField nText, aText, pnText, balText; //incText, billText, gText;
 	//private JPasswordField ccText;
 	private JButton editButton, incButton, billButton, gButton;
@@ -132,9 +129,9 @@ public class MainMenu extends JPanel{
 					setName(nText.getText());
 					setAddress(aText.getText());
 					setPhoneNumber(pnText.getText());
-					if(validTextToFloat() == false)
+					if(validTextToDouble() == false)
 						return;
-					setBalance(Float.valueOf(balText.getText()));
+					setBalance(Double.valueOf(balText.getText()));
 					nText.setEditable(false);
 					aText.setEditable(false);
 					pnText.setEditable(false);
@@ -203,9 +200,9 @@ public class MainMenu extends JPanel{
 	}
 	
 	
-	public boolean validTextToFloat() {
+	public boolean validTextToDouble() {
 		try {
-			Float.valueOf(balText.getText());
+			Double.valueOf(balText.getText());
         } catch (NumberFormatException exception) {
         	JOptionPane.showMessageDialog(this, "Please enter a valid balance number.");
         	balText.setText("");
@@ -253,12 +250,12 @@ public class MainMenu extends JPanel{
 	}
 	
 	//setter function for balance
-	public void setBalance(float f) {
+	public void setBalance(double f) {
 		this.balance = f;
 	}
 			
 	//getter function for balance
-	public float getBalance() {
+	public double getBalance() {
 		return this.balance;
 	}
 

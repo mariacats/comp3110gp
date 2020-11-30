@@ -10,37 +10,29 @@ public class Goal {
 	
 	double goalAmount;
 	int goalDate;
+	Customer customer;
 	
-	
-	double saving;
-	double goal;
-	double rem;
-	double month;
-	double income;
-	double bill;
-	long ReqTime;
+
 	
 	
 	public Goal() {
-		saving = 1000.0;
-		goal = 350.40;
-		rem = saving - goal;
+		goalDate = 31;
+		goalAmount = 500;
+		
 	}
 	
-	public Goal(double goal, double month, double income, double bill) {
-		setGoal(goal);
-		setMonth(month);
-		this.income = income;
-		this.bill = bill;
-		setSav(income, bill);
-		setRem();
-		setTimeRequired();
+	public Goal(Customer customer, double goalAmount, int goalDate) {
+		this.customer = customer;
 		
+		setGoalAmount(goalAmount);
+		setGoalDate(goalDate);
 	}
 	
 	
 	public void setGoalAmount(double goalAmount) {
-		this.goalAmount = goalAmount;
+		if (isValidValue(goalAmount)) {
+			this.goalAmount = (double) Math.round(goalAmount * 100.00) / (double) 100.00;
+		}
 	}
 	
 	public double getGoalAmount() {
@@ -55,57 +47,12 @@ public class Goal {
 		return this.goalDate;
 	}
 	
-	
-	
-	
-	
-	
-	public void setSav(double income, double bill) {
-		
-		this.saving = income - bill;
+	//private predicate method returns true if value is above 0 
+	private boolean isValidValue(double value) {
+		return (value > 0);
 	}
 	
-	public void setGoal(double goal) {
-		this.goal = goal;
-	}
 	
-	public void setRem() {
-		this.rem = getSav() - getGoal();
-	}
-	
-	public void setMonth(double month) {
-		this.month = month;
-	}
-	
-	public void setTimeRequired() {
-		this.ReqTime = Math.round(goal/month);
-		
-	}
-	
-	public double getSav() {	
-		return saving;
-	}
-	
-	public double getGoal() {
-		
-		return goal;
-	}
-	
-	public double getRem() {
-		return rem;
-		
-	}
-	
-	public double getMonth() {
-		return month;
-	}
-	
-	public long getTimeRequired() {
-		return ReqTime;
-	}
-	
-	public void display() {
-		System.out.println("It will take you atleast"+ReqTime+" months" );
-	}
+
 
 }

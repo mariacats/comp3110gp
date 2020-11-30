@@ -9,7 +9,7 @@ public class Customer {
 	private String name;
 	private String address;
 	private String phoneNumber;
-	private float balance;
+	private double balance;
 	
 	private List<Income> incomeList;
 	private List<Bill> billList;
@@ -87,12 +87,12 @@ public class Customer {
 	}
 	
 	//setter function for balance
-	public void setBalance(float f) {
-		this.balance = f;
+	public void setBalance(double f) {
+		this.balance = (double) Math.round(f * 100.00) / (double) 100.00;
 	}
 			
 	//getter function for balance
-	public float getBalance() {
+	public double getBalance() {
 		return this.balance;
 	}
 	

@@ -6,11 +6,6 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 
-//NEEDS ADJUSTMENT
-//NEEDS BUTTON TO RETURN TO MAIN MENU
-//NEEDS CUSTOMER OBJECT SAVING AND LOADING
-//ADD A TOTAL / MONTH CALCULATION THING
-//ADD OPTION TO REMOVE/COMPLETE/EDIT A BILL
 public class GoalGUI extends JPanel{
 	
 	JFrame frame;
@@ -24,7 +19,7 @@ public class GoalGUI extends JPanel{
 	
 	Customer customer;	//customer object
 	int duePeriod, size;
-	float amountDue;
+	double amountDue;
 	
 	Customer user;
 	
@@ -88,9 +83,30 @@ public class GoalGUI extends JPanel{
 				goal = new Goal();
 				
 				
-				// *********this doesn't check for text input, fix*********
-				double value = Double.parseDouble(JOptionPane.showInputDialog(frame, "What is the amount due for your goal?", null));
-				int days = Integer.parseInt(JOptionPane.showInputDialog(frame, "When, in days, is your goal due?", null));
+				//Get input from user, check if input is valid. If valid, set input.
+				double value;
+				
+				while(true) {
+					String input = JOptionPane.showInputDialog(frame, "What is the amount due for your goal?", null);
+					if(isDouble(input)) {
+						value = Double.parseDouble(input);
+						break;
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+				}
+				
+				int days;
+				
+				while(true) {
+					String input = JOptionPane.showInputDialog(frame, "When, in days, is your goal due?", null);
+					if(isInteger(input)) {
+						days = Integer.parseInt(input);
+						break;
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+				}
 
 				goal.setGoalAmount(value);
 				goal.setGoalDate(days);
@@ -112,7 +128,18 @@ public class GoalGUI extends JPanel{
 					JOptionPane.showMessageDialog(null, "There are no Goals to remove!");
 				}
 				else {
-					int remove = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter the number of the Goal you wish to remove: ", null));
+					int remove;
+					while(true) {
+						String input = JOptionPane.showInputDialog(frame, "Enter the number of the Goal you wish to remove: ", null);
+						if(isInteger(input)) {
+							remove = Integer.parseInt(input);
+							if(remove > 0 && remove <= goalList.size()){
+								break;
+							}
+						}
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+							
+					}
 					removeGoal(remove);
 					setupGUI();
 				}
@@ -140,6 +167,42 @@ public class GoalGUI extends JPanel{
 		this.repaint();
 	}
 	
+	/* Function to check if string being parsed is an Integer
+	 * Takes String as input
+	 * Returns true if it is an int, false otherwise
+	 */
+	private boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	/* Function to check if string being parsed is an Double
+	 * Takes String as input
+	 * Returns true if it is an double, false otherwise
+	 */
+	private boolean isDouble(String s) {
+	    try { 
+	        Double.parseDouble(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	/* Function to remove the goal from the list
+	 * Takes location of goal in list to be removed
+	 * Returns nothing. Remove the goal and decrement size.
+	 */
 	private void removeGoal(int remove) {
 		goalList.remove(remove-1);
 		this.size--;

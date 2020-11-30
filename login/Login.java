@@ -77,13 +77,7 @@ public class Login extends JPanel{
 
 		//when loginButton is clicked, call setter functions to set variables with textfield data, then call validateLogin() to check if entry is valid
 		loginButton.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TO BYPASS LOGIN FOR TESTING
-				//setUsername("Test");
-				//setPassword("Test");
-				//loginSuccess();
-				
-				
+			public void actionPerformed(ActionEvent e) {	
 				setUsername(uText.getText());
 				setPassword(String.valueOf(pText.getPassword()));
 				validateLogin();

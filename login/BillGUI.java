@@ -6,11 +6,6 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 
-//NEEDS ADJUSTMENT
-//NEEDS BUTTON TO RETURN TO MAIN MENU
-//NEEDS CUSTOMER OBJECT SAVING AND LOADING
-//ADD A TOTAL / MONTH CALCULATION THING
-//ADD OPTION TO REMOVE/COMPLETE/EDIT A BILL
 public class BillGUI extends JPanel{
 	
 	JFrame frame;
@@ -87,10 +82,30 @@ public class BillGUI extends JPanel{
 				//Retrieve the data inputs and add them to the Bill object
 				bill = new Bill();
 				
-				// *********this doesn't check for text input, fix*********
-				int value = Integer.parseInt(JOptionPane.showInputDialog(frame, "What is the amount due for your bill?", null));
-				int days = Integer.parseInt(JOptionPane.showInputDialog(frame, "When, in days, is your bill due?", null));
-
+				//Get input from user and covert to double/string
+				double value;
+				
+				while(true) {
+					String input = JOptionPane.showInputDialog(frame, "What is the amount due for your bill?", null);
+					if(isDouble(input)) {
+						value = Double.parseDouble(input);
+						break;
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+				}
+				
+				int days;
+				
+				while(true) {
+					String input = JOptionPane.showInputDialog(frame, "When, in days, is your bill due?", null);
+					if(isInteger(input)) {
+						days = Integer.parseInt(input);
+						break;
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+				}
 				bill.setAmountDue(value);
 				bill.setDuePeriod(days);
 				
@@ -108,11 +123,24 @@ public class BillGUI extends JPanel{
 		// if Remove button is pressed
 		removeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//check if list is empty
 				if (size == 0) {
-					JOptionPane.showMessageDialog(null, "There are no Bill to remove!");
+					JOptionPane.showMessageDialog(null, "There are no Bills to remove!");
 				} else {
-					int remove = Integer.parseInt(JOptionPane.showInputDialog(frame,
-							"Enter the number of the Bill you wish to remove: ", null));
+					//check is input is valid
+					int remove;
+					while(true) {
+						String input = JOptionPane.showInputDialog(frame, "Enter the number of the Bill you wish to remove: ", null);
+						if(isInteger(input)) {
+							remove = Integer.parseInt(input);
+							if(remove > 0 && remove <= billList.size()){
+								break;
+							}
+						}
+						JOptionPane.showMessageDialog(frame, "Please enter a valid value.");
+							
+					}
+					//remove the bill and refresh GUI
 					removeBill(remove);
 					setupGUI();
 				}
@@ -140,6 +168,42 @@ public class BillGUI extends JPanel{
 		this.repaint();
 	}
 	
+	/* Function to check if string being parsed is an Integer
+	 * Takes String as input
+	 * Returns true if it is an int, false otherwise
+	 */
+	private boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	/* Function to check if string being parsed is an Double
+	 * Takes String as input
+	 * Returns true if it is an double, false otherwise
+	 */
+	private boolean isDouble(String s) {
+	    try { 
+	        Double.parseDouble(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
+	
+	/* Function to remove the bill from the list
+	 * Takes location of bill in list to be removed
+	 * Returns nothing. Remove the bill and decrement size.
+	 */
 	private void removeBill(int remove) {
 		billList.remove(remove-1);
 		this.size--;

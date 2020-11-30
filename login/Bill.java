@@ -1,6 +1,6 @@
 package customer;
 
-import javax.swing.*;
+import javax.swing.*; 
 import java.awt.*;  
 import java.awt.event.*;
 
@@ -14,7 +14,7 @@ public class Bill {
 	
 	Customer customer;	//customer object
 	int duePeriod, rowSize;
-	float amountDue;
+	double amountDue;
 	
 	//default constructor that has some preset values,  must take a customer object as input
 	public Bill() {
@@ -27,7 +27,7 @@ public class Bill {
 	
 	/*overloaded constructor takes input
 	Input: a customer object, an integer that denotes the period the bill must be paid in days, and value of the amount due in dollars*/
-	public Bill(Customer customer, int duePeriod, float amountDue) {
+	public Bill(Customer customer, int duePeriod, double amountDue) {
 		this.customer = customer;
 		setDuePeriod(duePeriod);
 		setAmountDue(amountDue);
@@ -41,21 +41,22 @@ public class Bill {
 	}	
 	
 	//public access method to set the value of the the bill
-	public void setAmountDue(float amountDue) {
+	public void setAmountDue(double amountDue) {
 		if (isValidValue(amountDue)) {
-			this.amountDue = amountDue;
+			this.amountDue =(double) Math.round(amountDue * 100.00) / (double) 100.00;
 		}
-		
 	}
+
+
 
 	//private predicate method returns true if due period is within 0 to 365, false otherwise
 	private boolean isValidPeriod(int period) {
 		return (period > 0 && period < 366); 
 	}
 	
-	//private predicate method returns true if value is above 0 and below 2,147,483,648 (2,147,483,647 is largest int)
-	private boolean isValidValue(float value) {
-		return (value > 0 && value <= 2147483647);
+	//private predicate method returns true if value is above 0 
+	private boolean isValidValue(double value) {
+		return (value > 0);
 	}
 	
 	//public access method to get due period
@@ -65,9 +66,9 @@ public class Bill {
 	}
 	
 	//public access method to get amount due
-	public float getValue()
+	public double getValue()
 	{
-		return (float) amountDue;
+		return (double) amountDue;
 	}
 	
 

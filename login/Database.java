@@ -45,12 +45,8 @@ public class Database {
 	 * Searches if the username exists. If it does, return it's position. If nothing is found, return -1.
 	 */
 	public int findUsername(String username) {
-		System.out.println("User entered username: "+username);
-		System.out.println("Customer List size: "+customerList.size());
 		for(int i=0; i<customerList.size(); i++) {
-			System.out.println("Comparing... "+username+" and "+customerList.get(i).getUsername());
 			if(username.compareTo(customerList.get(i).getUsername()) == 0) {
-				System.out.println("Match found. Returning... "+i);
 				return i;
 			}
 		}
