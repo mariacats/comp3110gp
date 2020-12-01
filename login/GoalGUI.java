@@ -87,7 +87,7 @@ public class GoalGUI extends JPanel{
 				double value;
 				
 				while(true) {
-					String input = JOptionPane.showInputDialog(frame, "What is the amount due for your goal?", null);
+					String input = JOptionPane.showInputDialog(frame, "What is your Goal? (amount you would like to save)", null);
 					if(isDouble(input)) {
 						value = Double.parseDouble(input);
 						break;
@@ -99,7 +99,7 @@ public class GoalGUI extends JPanel{
 				int days;
 				
 				while(true) {
-					String input = JOptionPane.showInputDialog(frame, "When, in days, is your goal due?", null);
+					String input = JOptionPane.showInputDialog(frame, "In how many days would you like to accomplish this goal?", null);
 					if(isInteger(input)) {
 						days = Integer.parseInt(input);
 						break;
